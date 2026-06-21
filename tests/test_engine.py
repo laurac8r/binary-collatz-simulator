@@ -4,7 +4,7 @@ from src.binary_collatz.engine import iterate
 
 
 class TestIterate:
-    @pytest.mark.parametrize("n, lgt, peak", [(27, 111, 9232), (6, 8, 16), (1, 0, 0)])
+    @pytest.mark.parametrize("n, lgt, peak", [(27, 111, 9232), (6, 8, 16), (1, 0, 0), (256, 8, 256)])
     def test_accurate_num_and_peak(self, n, lgt, peak):
         steps = []
 
@@ -13,6 +13,6 @@ class TestIterate:
         for step in iterate(step):
             steps.append(step)
 
-        assert len(steps) == lgt
+        assert len(steps)-1 == lgt
         if lgt > 0:
             assert max([x.value for x in steps]) == peak

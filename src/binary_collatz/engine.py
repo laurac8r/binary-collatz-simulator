@@ -31,6 +31,7 @@ class Step:
 
 def iterate(n: int):
     step = Step(0, copy(n), None, '')
+    yield step
     while step.value != 1:
         step = Step.iterate(step)
         yield step
