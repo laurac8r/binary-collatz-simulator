@@ -15,19 +15,24 @@ class Step:
     op: Op | None
     bits: str
 
+    @classmethod
+    def iterate(cls, prior: "Step") -> "Step":
+        num = 0
+        op = None
+        if prior.value % 2 == 1:
+            num = 3 * prior.value + 1
+            op = Op.ODD
+        elif prior.value % 2 == 0:
+            num = prior.value // 2
+            op = Op.EVEN
+        return cls(prior.index + 1, num, op, f'{num:b}')
+
+
 
 def iterate(n: int):
     step = Step(0, copy(n), None, '')
     while step.value != 1:
-        num = 0
-        op = None
-        if step.value % 2 == 1:
-            num = 3 * step.value + 1
-            op = Op.ODD
-        elif step.value % 2 == 0:
-            num = step.value // 2
-            op = Op.EVEN
-        step = Step(step.index + 1, num, op, f'{num:b}')
+        step = Step.iterate(step)
         yield step
 
 
