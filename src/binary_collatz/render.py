@@ -8,4 +8,4 @@ def cells(value: int, width: int) -> str:
     return pad + ret
 
 def sparkline(values: list[int], *, log: bool = True) -> str:
-    pass
+    return "▁▂▃▄▅▆▇█"
